@@ -703,7 +703,9 @@ document.querySelectorAll('.privacy-option').forEach(option => {
 
 // 在页面加载时初始化隐私设置
 window.addEventListener('DOMContentLoaded', function() {
-    updatePrivacyInfo();
+    initCharts();
+    updatePrivacyInfo(); // 初始化隐私保护信息
+    updateTimers();
 });
         // 初始化图表
         function initCharts() {
@@ -851,6 +853,14 @@ window.addEventListener('DOMContentLoaded', function() {
             document.getElementById('last-update').textContent = 
                 lastUpdate.getHours().toString().padStart(2, '0') + ':' + 
                 lastUpdate.getMinutes().toString().padStart(2, '0');
+             // 更新IP轮换时间
+    const ipRotation = privacyConfig[currentPrivacyLevel].ipRotation || 10;
+    document.getElementById('ip-change').textContent = 
+        nextIpChange.toString().padStart(2, '0') + ':' + 
+        now.getSeconds().toString().padStart(2, '0');
+    
+    // 更新当前IP（模拟）
+    document.getElementById('current-ip').textContent = generateRandomIP();
         }
 
         // 启动监控
@@ -891,6 +901,14 @@ window.addEventListener('DOMContentLoaded', function() {
                 setInterval(updateTimers, 60000);
                 updateTimers();
             }, 2000);
+            document.getElementById('start-btn').addEventListener('click', function() {
+    // ...现有代码
+    
+    // 显示隐私保护激活信息
+    const config = privacyConfig[currentPrivacyLevel];
+    alert(`隐私保护已激活：${config.name}\n\n保护功能：\n- ${config.features.join('\n- ')}`);
+    
+    // ...后续代码
         });
 
         // 测试连接
