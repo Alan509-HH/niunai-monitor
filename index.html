@@ -16,6 +16,9 @@
             --success: #00b894;
             --warning: #fdcb6e;
             --danger: #ff7675;
+            --privacy-basic: #4cd137;     /* 绿色 */
+            --privacy-advanced: #00a8ff;   /* 蓝色 */
+            --privacy-max: #8c7ae6;        /* 紫色 */
         }
         
         * {
@@ -254,6 +257,11 @@
             border-left: 4px solid var(--danger);
         }
         
+        .notification-info {
+            background: rgba(37, 117, 252, 0.15);
+            border-left: 4px solid var(--secondary);
+        }
+        
         .notification-icon {
             font-size: 1.5rem;
         }
@@ -281,101 +289,137 @@
             font-size: 0.9rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
+        
         .privacy-level {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 5px;
-}
-
-.privacy-option {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    padding: 10px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.privacy-option:hover {
-    background: rgba(255, 255, 255, 0.1);
-}
-
-.privacy-option.active {
-    background: rgba(255, 255, 255, 0.15);
-    border-left: 3px solid;
-}
-
-.privacy-badge {
-    width: 20px;
-    height: 20px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-}
-
-.basic .privacy-badge {
-    background-color: var(--privacy-basic);
-}
-
-.advanced .privacy-badge {
-    background-color: var(--privacy-advanced);
-}
-
-.max .privacy-badge {
-    background-color: var(--privacy-max);
-}
-
-.basic.active {
-    border-color: var(--privacy-basic);
-}
-
-.advanced.active {
-    border-color: var(--privacy-advanced);
-}
-
-.max.active {
-    border-color: var(--privacy-max);
-}
-
-.privacy-info {
-    margin-top: 15px;
-    padding: 15px;
-    border-radius: 10px;
-    background: rgba(0, 0, 0, 0.2);
-}
-
-.privacy-info h4 {
-    margin-bottom: 10px;
-    color: var(--secondary);
-}
-
-.privacy-info ul {
-    padding-left: 20px;
-}
-
-.privacy-info li {
-    margin-bottom: 8px;
-}
-
-.protection-icon {
-    font-size: 1.8rem;
-    margin-bottom: 10px;
-}
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 5px;
+        }
+        
+        .privacy-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        
+        .privacy-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .privacy-option.active {
+            background: rgba(255, 255, 255, 0.15);
+            border-left: 3px solid;
+        }
+        
+        .privacy-badge {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+        }
+        
+        .basic .privacy-badge {
+            background-color: var(--privacy-basic);
+        }
+        
+        .advanced .privacy-badge {
+            background-color: var(--privacy-advanced);
+        }
+        
+        .max .privacy-badge {
+            background-color: var(--privacy-max);
+        }
+        
+        .basic.active {
+            border-color: var(--privacy-basic);
+        }
+        
+        .advanced.active {
+            border-color: var(--privacy-advanced);
+        }
+        
+        .max.active {
+            border-color: var(--privacy-max);
+        }
+        
+        .privacy-info {
+            margin-top: 15px;
+            padding: 15px;
+            border-radius: 10px;
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .privacy-info h4 {
+            margin-bottom: 10px;
+            color: var(--secondary);
+        }
+        
+        .privacy-info ul {
+            padding-left: 20px;
+        }
+        
+        .privacy-info li {
+            margin-bottom: 8px;
+        }
+        
+        .protection-icon {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+        
+        /* 添加加载动画 */
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loading::after {
+            content: '';
+            display: inline-block;
+            width: 1em;
+            height: 1em;
+            margin-left: 0.5em;
+            border: 2px solid currentColor;
+            border-radius: 50%;
+            border-right-color: transparent;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        .text-primary {
+            color: var(--secondary);
+        }
+        
         @media (max-width: 768px) {
-            .dashboard {
-                grid-template-columns: 1fr;
-            }
-            
-            .stats-grid {
+            .dashboard, .stats-grid {
                 grid-template-columns: 1fr;
             }
             
             .flex {
                 flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+            
+            .card {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
             }
         }
     </style>
@@ -469,6 +513,11 @@
                     <button class="btn btn-outline" id="test-btn">
                         <span>🔍 测试连接</span>
                     </button>
+                </div>
+                
+                <div class="notification notification-info">
+                    <div class="notification-icon">🌐</div>
+                    <div>当前IP: <strong id="current-ip">192.168.1.1</strong> • 下次轮换: <strong id="ip-change">05:30</strong></div>
                 </div>
             </div>
             
@@ -601,366 +650,6 @@
             { time: '2023-05-01T13:00:00', value: 132 },
             { time: '2023-05-01T13:30:00', value: 135 }
         ];
-// 隐私保护配置
-const privacyConfig = {
-    basic: {
-        name: "基本保护",
-        features: [
-            "随机 User-Agent 轮换",
-            "基础数据加密",
-            "禁用位置追踪"
-        ],
-        requestDelay: 2000, // 2秒延迟
-        userAgents: [
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36",
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Safari/605.1.15"
-        ]
-    },
-    advanced: {
-        name: "高级保护",
-        features: [
-            "随机 User-Agent 轮换",
-            "请求延迟 (2-5秒)",
-            "高级数据加密",
-            "IP地址混淆",
-            "禁用WebRTC"
-        ],
-        requestDelay: [2000, 5000], // 2-5秒随机延迟
-        userAgents: [
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36",
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36",
-            "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.107 Safari/537.36"
-        ],
-        ipRotation: 10 // 每10分钟更换IP
-    },
-    max: {
-        name: "最大保护",
-        features: [
-            "随机 User-Agent 轮换",
-            "随机请求延迟 (5-10秒)",
-            "军用级数据加密",
-            "虚拟IP轮换",
-            "禁用所有追踪技术",
-            "数据混淆算法"
-        ],
-        requestDelay: [5000, 10000], // 5-10秒随机延迟
-        userAgents: [
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:90.0) Gecko/20100101 Firefox/90.0",
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:90.0) Gecko/20100101 Firefox/90.0",
-            "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:90.0) Gecko/20100101 Firefox/90.0",
-            "Mozilla/5.0 (iPhone; CPU iPhone OS 14_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/14.1.1 Mobile/15E148 Safari/604.1"
-        ],
-        ipRotation: 5 // 每5分钟更换IP
-    }
-};
 
-// 当前隐私设置
-let currentPrivacyLevel = 'advanced';
-
-// 更新隐私保护信息
-function updatePrivacyInfo() {
-    const config = privacyConfig[currentPrivacyLevel];
-    
-    // 更新顶部状态
-    document.getElementById('privacy-level').textContent = config.name;
-    
-    // 更新功能列表
-    const featuresList = document.getElementById('privacy-features');
-    featuresList.innerHTML = '';
-    
-    config.features.forEach(feature => {
-        const li = document.createElement('li');
-        li.textContent = feature;
-        featuresList.appendChild(li);
-    });
-    
-    // 更新UI中的隐私状态
-    document.querySelectorAll('.privacy-option').forEach(option => {
-        option.classList.remove('active');
-    });
-    document.querySelector(`.privacy-option.${currentPrivacyLevel}`).classList.add('active');
-    
-    // 更新通知
-    const notification = document.querySelector('.notification-success');
-    notification.innerHTML = `
-        <div class="notification-icon">✅</div>
-        <div>隐私保护已启用 - <strong>${config.name}</strong></div>
-    `;
-}
-
-// 生成随机IP地址
-function generateRandomIP() {
-    return `${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}.${Math.floor(Math.random() * 255)}`;
-}
-
-// 隐私级别选择
-document.querySelectorAll('.privacy-option').forEach(option => {
-    option.addEventListener('click', function() {
-        currentPrivacyLevel = this.dataset.level;
-        updatePrivacyInfo();
-    });
-});
-
-// 在页面加载时初始化隐私设置
-window.addEventListener('DOMContentLoaded', function() {
-    initCharts();
-    updatePrivacyInfo(); // 初始化隐私保护信息
-    updateTimers();
-});
-        // 初始化图表
-        function initCharts() {
-            // 价格趋势图
-            const trendCtx = document.getElementById('price-trend-chart').getContext('2d');
-            new Chart(trendCtx, {
-                type: 'line',
-                data: {
-                    labels: marketItems.map(item => item.name),
-                    datasets: [{
-                        label: '当前价格',
-                        data: marketItems.map(item => item.currentPrice),
-                        backgroundColor: marketItems.map(item => 
-                            item.trend === 'up' ? 'rgba(0, 184, 148, 0.2)' : 'rgba(255, 118, 117, 0.2)'
-                        ),
-                        borderColor: marketItems.map(item => 
-                            item.trend === 'up' ? 'rgb(0, 184, 148)' : 'rgb(255, 118, 117)'
-                        ),
-                        borderWidth: 2,
-                        tension: 0.3
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            display: false
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    const item = marketItems[context.dataIndex];
-                                    const profit = ((item.currentPrice - item.avg24h) / item.avg24h * 100).toFixed(1);
-                                    return [
-                                        `当前价: ${item.currentPrice}金币`,
-                                        `24小时均价: ${item.avg24h}金币`,
-                                        `利润率: ${profit}%`
-                                    ];
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: false,
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            },
-                            ticks: {
-                                color: 'rgba(255, 255, 255, 0.7)'
-                            }
-                        },
-                        x: {
-                            grid: {
-                                display: false
-                            },
-                            ticks: {
-                                color: 'rgba(255, 255, 255, 0.7)'
-                            }
-                        }
-                    }
-                }
-            });
-
-            // 历史价格图表
-            const historyCtx = document.getElementById('history-chart').getContext('2d');
-            new Chart(historyCtx, {
-                type: 'line',
-                data: {
-                    datasets: [{
-                        label: '量子饲料价格趋势',
-                        data: priceHistory.map(point => ({
-                            x: point.time,
-                            y: point.value
-                        })),
-                        borderColor: 'rgb(106, 17, 203)',
-                        backgroundColor: 'rgba(106, 17, 203, 0.1)',
-                        borderWidth: 3,
-                        pointRadius: 4,
-                        pointBackgroundColor: 'rgb(37, 117, 252)',
-                        tension: 0.2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            labels: {
-                                color: 'rgba(255, 255, 255, 0.7)'
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            type: 'time',
-                            time: {
-                                unit: 'hour',
-                                tooltipFormat: 'HH:mm',
-                                displayFormats: {
-                                    hour: 'HH:mm'
-                                }
-                            },
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            },
-                            ticks: {
-                                color: 'rgba(255, 255, 255, 0.7)'
-                            }
-                        },
-                        y: {
-                            grid: {
-                                color: 'rgba(255, 255, 255, 0.1)'
-                            },
-                            ticks: {
-                                color: 'rgba(255, 255, 255, 0.7)'
-                            },
-                            title: {
-                                display: true,
-                                text: '价格 (金币)',
-                                color: 'rgba(255, 255, 255, 0.7)'
-                            }
-                        }
-                    }
-                }
-            });
-        }
-
-        // 更新定时器
-        function updateTimers() {
-            const now = new Date();
-            const minutes = now.getMinutes();
-            const nextUpdate = 30 - (minutes % 30);
-            
-            document.getElementById('next-update').textContent = `${nextUpdate}分钟`;
-            
-            const nextUpdateTime = new Date(now.getTime() + nextUpdate * 60000);
-            const nextTimeStr = nextUpdateTime.getHours().toString().padStart(2, '0') + ':' + 
-                              nextUpdateTime.getMinutes().toString().padStart(2, '0');
-            document.getElementById('next-scan').textContent = nextTimeStr;
-            
-            // 更新上次更新时间
-            const lastUpdate = new Date(now.getTime() - (30 - nextUpdate) * 60000);
-            document.getElementById('last-update').textContent = 
-                lastUpdate.getHours().toString().padStart(2, '0') + ':' + 
-                lastUpdate.getMinutes().toString().padStart(2, '0');
-             // 更新IP轮换时间
-    const ipRotation = privacyConfig[currentPrivacyLevel].ipRotation || 10;
-    document.getElementById('ip-change').textContent = 
-        nextIpChange.toString().padStart(2, '0') + ':' + 
-        now.getSeconds().toString().padStart(2, '0');
-    
-    // 更新当前IP（模拟）
-    document.getElementById('current-ip').textContent = generateRandomIP();
-        }
-
-        // 启动监控
-        document.getElementById('start-btn').addEventListener('click', function() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            if (!username || !password) {
-                alert('请输入游戏账号和密码');
-                return;
-            }
-            
-            this.innerHTML = '<span>⏳ 监控运行中...</span>';
-            this.disabled = true;
-            
-            // 模拟API调用
-            setTimeout(() => {
-                // 更新高利润项目计数
-                const profitItems = marketItems.filter(item => 
-                    Math.abs((item.currentPrice - item.avg24h) / item.avg24h * 100) > 15
-                );
-                document.getElementById('profit-count').textContent = profitItems.length;
-                
-                // 更新最佳利润物品
-                const bestProfit = Math.max(...marketItems.map(item => 
-                    Math.abs((item.currentPrice - item.avg24h) / item.avg24h * 100)
-                ).toFixed(1);
-                document.getElementById('best-profit').textContent = bestProfit + '%';
-                
-                // 显示成功消息
-                const notifications = document.querySelector('.notification-success');
-                notifications.innerHTML = `
-                    <div class="notification-icon">✅</div>
-                    <div>监控已启动 - 成功连接游戏服务器</div>
-                `;
-                
-                // 设置定时刷新
-                setInterval(updateTimers, 60000);
-                updateTimers();
-            }, 2000);
-            document.getElementById('start-btn').addEventListener('click', function() {
-    // ...现有代码
-    
-    // 显示隐私保护激活信息
-    const config = privacyConfig[currentPrivacyLevel];
-    alert(`隐私保护已激活：${config.name}\n\n保护功能：\n- ${config.features.join('\n- ')}`);
-    
-    // ...后续代码
-        });
-
-        // 测试连接
-        document.getElementById('test-btn').addEventListener('click', function() {
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            
-            if (!username || !password) {
-                alert('请输入游戏账号和密码');
-                return;
-            }
-            
-            const originalText = this.innerHTML;
-            this.innerHTML = '<span>🔌 测试中...</span>';
-            
-            // 模拟API测试
-            setTimeout(() => {
-                this.innerHTML = originalText;
-                alert('✅ 成功连接到游戏服务器！API访问正常');
-            }, 1500);
-        });
-
-        // 导出数据
-        document.getElementById('export-btn').addEventListener('click', function() {
-            // 创建CSV内容
-            let csvContent = "data:text/csv;charset=utf-8,";
-            csvContent += "物品名称,当前价格,24小时均价,利润率\n";
-            
-            marketItems.forEach(item => {
-                const profit = ((item.currentPrice - item.avg24h) / item.avg24h * 100).toFixed(1);
-                csvContent += `${item.name},${item.currentPrice},${item.avg24h},${profit}%\n`;
-            });
-            
-            // 创建下载链接
-            const encodedUri = encodeURI(csvContent);
-            const link = document.createElement("a");
-            link.setAttribute("href", encodedUri);
-            link.setAttribute("download", "milkyway_market_data.csv");
-            document.body.appendChild(link);
-            
-            link.click();
-            document.body.removeChild(link);
-        });
-
-        // 初始化页面
-        window.addEventListener('DOMContentLoaded', function() {
-            initCharts();
-            updateTimers();
-            
-            // 设置自动更新时间
-            setInterval(updateTimers, 60000);
-        });
-    </script>
-</body>
-</html>
+        // 隐私保护配置
+        const privacyConfig
